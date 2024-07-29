@@ -1,8 +1,13 @@
 import React from 'react'
-
+import Navbar from './navbar'
 const UserPage = () => {
   return (
-    <div>UserPage</div>
+    <div>
+    <Navbar/>
+    <div className='text text-center'>
+      User page 
+    </div>
+    </div>
   )
 }
 
