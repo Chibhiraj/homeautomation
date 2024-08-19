@@ -3,15 +3,23 @@ import login from "../img/10782835_19199259.jpg";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import bg from '../img/11Meshrd Vcard-07.jpg'
+import bg from '../font and soze.jpg'
+import smallBg from '../brand.png';  // Import the smaller device image
 import { Image } from "react-bootstrap";
-import { brown } from "@mui/material/colors";
-
+import { useMediaQuery } from '@mui/material';
+import nav from "../nav.png"
 const Home = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+
+  const isSmallScreen = useMediaQuery('(max-width: 600px)'); // Adjust the breakpoint as needed
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,7 +34,7 @@ const Home = () => {
     var password = document.getElementById("passwordlogin").value;
 
     if (mail === "admin" && password === "admin") {
-      navigate("/adminpage");
+      navigate("/CBEHome");
     } else if (mail === "user" && password === "user") {
       navigate("/userpage");
     }
@@ -34,8 +42,33 @@ const Home = () => {
 
   return (
     <div>
-      <div style={{ position: 'relative', display: 'inline-block',padding:10 }}>
-        <Image src={bg} style={{padding:10}}/>
+     <AppBar position="fixed" style={{ backgroundColor: '#2e3e57' }}>
+  <Toolbar>
+  <img src={nav} alt="logo" style={{ height: 40 }} />
+  <Typography variant="h6" style={{ flexGrow: 1 }}>
+    
+    </Typography>
+    <IconButton edge="end" color="inherit" aria-label="menu"></IconButton>
+    <Button color="inherit" component={Link} to="/" style={{ margin: '0 15px' }}>
+      Home
+    </Button>
+    <Button color="inherit" component={Link} to="/contact" style={{ margin: '0 15px' }}>
+      Contact
+    </Button>
+    <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
+      Services
+    </Button>
+    <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
+      Products
+    </Button>
+    <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
+      About
+    </Button>
+  </Toolbar>
+</AppBar>
+
+      <div style={{ position: 'relative', display: 'inline-block'}}>
+        <Image src={isSmallScreen ? smallBg : bg}  />
         <Button
           onClick={handleClickOpen}
           variant="contained"
@@ -43,10 +76,10 @@ const Home = () => {
           style={{
             position: 'absolute',
             top: '70%',
-            left: '90%',
+            left: '60%',
             transform: 'translate(-70%, -50%)',
-            'background-color': "#3E2723 ",
-            fontFamily:'Cenzil'
+            backgroundColor: "#3E2723 ",
+            fontFamily: 'Cenzil'
           }}
         >
           Login/SignUp
@@ -56,14 +89,14 @@ const Home = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <div className="flex justify-between items-center">
-            <div className="ml-auto" style={{ paddingLeft: 10 ,fontFamily:'Cenzil'}}>
+            <div className="ml-auto" style={{ paddingLeft: 10, fontFamily: 'Cenzil' }}>
               <i
                 className="fas fa-times cursor-pointer"
                 onClick={handleClose}
               ></i>
             </div>
           </div>
-          <div className="flex flex-col justify-center px-6 py-12 lg:px-8 bg-white" style={{fontFamily:'Cenzil'}}>
+          <div className="flex flex-col justify-center px-6 py-12 lg:px-8 bg-white" style={{ fontFamily: 'Cenzil' }}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Login to your account
@@ -125,7 +158,7 @@ const Home = () => {
                   <button
                     type="button"
                     onClick={useradmin}
-                    style={{'background-color': "#3E2723 "}}
+                    style={{ backgroundColor: "#3E2723 " }}
                     className="flex w-full justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Log in

@@ -6,6 +6,10 @@ import {
   Switch,
   Typography,
   Box,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
 } from "@mui/material";
 import Navbar from "../pages/navbar";
 import axios from "axios";
@@ -73,7 +77,6 @@ function YourComponent() {
           justifyContent: "center",
           fontFamily: "Cinzel, serif",
           alignItems: "center",
-
         }}
       >
         <Grid container spacing={3} justifyContent="center">
@@ -87,126 +90,110 @@ function YourComponent() {
                   Hall
                 </h3>
               </div>
-              <CardActions>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{ marginRight: "8px" ,fontFamily: "Cinzel, serif"}}
-                  >
-                    Light 1
-                  </Typography>
-                  <Switch
-                    checked={switchStates.Light1}
-                    onChange={handleSwitchChange}
-                    name="Light1"
-                    inputProps={{ "aria-label": "Light 1" }}
-                    style={{
-                      color: switchStates.Light1 ? "#FFB200" : "#808D7C",
-                      "&.Mui-checked": {
-                        color: "red",
-                      },
-                    }}
-                  />
-                </Box>
-              </CardActions>
-              <CardActions>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{ marginRight: "8px",fontFamily: "Cinzel, serif" }}
-                  >
-                    Light 2
-                  </Typography>
-                  <Switch
-                    checked={switchStates.Light2}
-                    onChange={handleSwitchChange}
-                    name="Light2"
-                    inputProps={{ "aria-label": "Light 2" }}
-                    style={{
-                      color: switchStates.Light2 ? "#FFB200" : "#808D7C",
-                      "&.Mui-checked": {
-                        color: "red",
-                      },
-                    }}
-                  />
-                </Box>
-              </CardActions>
-              <CardActions>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{ marginRight: "8px",fontFamily: "Cinzel, serif" }}
-                  >
-                    TV Fan
-                  </Typography>
-                  <Switch
-                    checked={switchStates.TvFan}
-                    onChange={handleSwitchChange}
-                    name="TvFan"
-                    inputProps={{ "aria-label": "TV Fan" }}
-                    style={{
-                      color: switchStates.TvFan ? "#FFB200" : "#808D7C",
-                      "&.Mui-checked": {
-                        color: "red",
-                      },
-                    }}
-                  />
-                </Box>
-              </CardActions>
-              <CardActions>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{ marginRight: "8px",fontFamily: "Cinzel, serif" }}
-                  >
-                    Sofa Fan
-                  </Typography>
-                  <Switch
-                    checked={switchStates.SofaFan}
-                    onChange={handleSwitchChange}
-                    name="SofaFan"
-                    inputProps={{ "aria-label": "Sofa Fan" }}
-                    style={{
-                      color: switchStates.SofaFan ? "#FFB200" : "#808D7C",
-                      "&.Mui-checked": {
-                        color: "red",
-                      },
-                    }}
-                  />
-                </Box>
-              </CardActions>
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ marginRight: "8px", fontFamily: "Cinzel, serif" }}
+                      >
+                        Light 1
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                      <Switch
+                        checked={switchStates.Light1}
+                        onChange={handleSwitchChange}
+                        name="Light1"
+                        inputProps={{ "aria-label": "Light 1" }}
+                        style={{
+                          color: switchStates.Light1 ? "#FFB200" : "#808D7C",
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ marginRight: "8px", fontFamily: "Cinzel, serif" }}
+                      >
+                        Light 2
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                      <Switch
+                        checked={switchStates.Light2}
+                        onChange={handleSwitchChange}
+                        name="Light2"
+                        inputProps={{ "aria-label": "Light 2" }}
+                        style={{
+                          color: switchStates.Light2 ? "#FFB200" : "#808D7C",
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ marginRight: "8px", fontFamily: "Cinzel, serif" }}
+                      >
+                        TV Fan
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                      <Switch
+                        checked={switchStates.TvFan}
+                        onChange={handleSwitchChange}
+                        name="TvFan"
+                        inputProps={{ "aria-label": "TV Fan" }}
+                        style={{
+                          color: switchStates.TvFan ? "#FFB200" : "#808D7C",
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ marginRight: "8px", fontFamily: "Cinzel, serif" }}
+                      >
+                        Sofa Fan
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                      <Switch
+                        checked={switchStates.SofaFan}
+                        onChange={handleSwitchChange}
+                        name="SofaFan"
+                        inputProps={{ "aria-label": "Sofa Fan" }}
+                        style={{
+                          color: switchStates.SofaFan ? "#FFB200" : "#808D7C",
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </Card>
           </Grid>
           <Grid item xs={10} sm={6} md={3}>
@@ -214,131 +201,115 @@ function YourComponent() {
               <div style={{ backgroundColor: "#9e8a57" }}>
                 <h3
                   className="text text-center pb-2 pt-1"
-                  style={{ color: "white", fontFamily: "Cinzel, serif",fontSize:'4' }}
+                  style={{ color: "white", fontFamily: "Cinzel, serif", fontSize: '4' }}
                 >
                   My Room
                 </h3>
               </div>
-              <CardActions>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{ marginRight: "8px",fontFamily: "Cinzel, serif" }}
-                  >
-                    Light
-                  </Typography>
-                  <Switch
-                    checked={switchStates.RLight}
-                    onChange={handleSwitchChange}
-                    name="RLight"
-                    inputProps={{ "aria-label": "Light" }}
-                    style={{
-                      color: switchStates.RLight ? "#FFB200" : "#808D7C",
-                      "&.Mui-checked": {
-                        color: "red",
-                      },
-                    }}
-                  />
-                </Box>
-              </CardActions>
-              <CardActions>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{ marginRight: "8px" ,fontFamily: "Cinzel, serif"}}
-                  >
-                    Fan
-                  </Typography>
-                  <Switch
-                    checked={switchStates.RFan}
-                    onChange={handleSwitchChange}
-                    name="RFan"
-                    inputProps={{ "aria-label": "Fan" }}
-                    style={{
-                      color: switchStates.RFan ? "#FFB200" : "#808D7C",
-                      "&.Mui-checked": {
-                        color: "red",
-                      },
-                    }}
-                  />
-                </Box>
-              </CardActions>
-              <CardActions>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{ marginRight: "8px",fontFamily: "Cinzel, serif" }}
-                  >
-                    AC
-                  </Typography>
-                  <Switch
-                    checked={switchStates.RAc}
-                    onChange={handleSwitchChange}
-                    name="RAc"
-                    inputProps={{ "aria-label": "AC" }}
-                    style={{
-                      color: switchStates.RAc ? "#FFB200" : "#808D7C",
-                      "&.Mui-checked": {
-                        color: "red",
-                      },
-                    }}
-                  />
-                </Box>
-              </CardActions>
-              <CardActions>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    component="div"
-                    sx={{ marginRight: "8px",fontFamily: "Cinzel, serif" }}
-                  >
-                    Wifi
-                  </Typography>
-                  <Switch
-                    checked={switchStates.RWifi}
-                    onChange={handleSwitchChange}
-                    name="RWifi"
-                    inputProps={{ "aria-label": "Wifi" }}
-                    style={{
-                      color: switchStates.RWifi ? "#FFB200" : "#808D7C",
-                      "&.Mui-checked": {
-                        color: "red",
-                      },
-                    }}
-                  />
-                </Box>
-              </CardActions>
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ marginRight: "8px", fontFamily: "Cinzel, serif" }}
+                      >
+                        Light
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                      <Switch
+                        checked={switchStates.RLight}
+                        onChange={handleSwitchChange}
+                        name="RLight"
+                        inputProps={{ "aria-label": "Light" }}
+                        style={{
+                          color: switchStates.RLight ? "#FFB200" : "#808D7C",
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ marginRight: "8px", fontFamily: "Cinzel, serif" }}
+                      >
+                        Fan
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                      <Switch
+                        checked={switchStates.RFan}
+                        onChange={handleSwitchChange}
+                        name="RFan"
+                        inputProps={{ "aria-label": "Fan" }}
+                        style={{
+                          color: switchStates.RFan ? "#FFB200" : "#808D7C",
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ marginRight: "8px", fontFamily: "Cinzel, serif" }}
+                      >
+                        AC
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                      <Switch
+                        checked={switchStates.RAc}
+                        onChange={handleSwitchChange}
+                        name="RAc"
+                        inputProps={{ "aria-label": "AC" }}
+                        style={{
+                          color: switchStates.RAc ? "#FFB200" : "#808D7C",
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ marginRight: "8px", fontFamily: "Cinzel, serif" }}
+                      >
+                        Wifi
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                      <Switch
+                        checked={switchStates.RWifi}
+                        onChange={handleSwitchChange}
+                        name="RWifi"
+                        inputProps={{ "aria-label": "Wifi" }}
+                        style={{
+                          color: switchStates.RWifi ? "#FFB200" : "#808D7C",
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </Card>
           </Grid>
         </Grid>

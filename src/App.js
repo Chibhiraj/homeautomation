@@ -107,6 +107,7 @@ import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import UserPage from './pages/UserPage';
 import CBEHome from './locations/CBEHome';
+import CBEOffice from './locations/CBEOffice';
 import './App.css'
 
 const App = () => {
@@ -118,6 +119,7 @@ const App = () => {
         <Route path="/userPage" element={<UserPage />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/CBEHome" element={<CBEHome />} />
+        <Route path="/CBEOffice" element={<CBEOffice />} />
         {/* <Route path="*" element={<NoPage />} /> */}
       </Routes>
     </div>
@@ -125,3 +127,18 @@ const App = () => {
 };
 
 export default App;
+
+// import React from 'react';
+// import './App.css';
+// import bg from './Meshrd Vcard-07.jpg'; // Ensure you import your image
+
+// const App = () => {
+//   return (
+//     <div className="image-container">
+//       <img src={bg} alt="Background" className="responsive-image" />
+      
+//     </div>
+//   );
+// };
+
+// export default App;

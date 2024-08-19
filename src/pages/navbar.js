@@ -50,22 +50,24 @@ const Navbar = () => {
 
   return (
     // <Router>
-    
+
     <div className="text-center">
-    
       <div style={{ display: "flex" }}></div>
 
       <div
         id="hs-offcanvas-example"
-        className="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64  border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 "
+        className="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 border-e border-blue-800 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300"
         role="dialog"
         tabIndex="-1"
         aria-label="Sidebar"
         style={{ backgroundColor: "#9e8a57" }}
       >
         <div className="px-6">
-          <h1 style={{ color: "white",fontFamily: "Cinzel, serif" }}>mSmart</h1>
+          <h1 style={{ color: "white", fontFamily: "Cinzel, serif" }}>
+            mSmart
+          </h1>
         </div>
+
         <nav
           className="hs-accordion-group p-6 w-full flex flex-col flex-wrap "
           data-hs-accordion-always-open
@@ -129,7 +131,6 @@ const Navbar = () => {
             </li>
           </ul>
         </nav>
-        
       </div>
 
       <nav className="bg" style={{ backgroundColor: "#9e8a57" }}>
@@ -179,13 +180,16 @@ const Navbar = () => {
                 )}
               </button>
             </div>
-            <div className=" pl-40 ml-20 sm:text text-left">
-              <h4 style={{ color: "white", fontFamily: "Cinzel, serif" }}>
+            <div className="pl-16 ml-20 sm:text text-left sm:text-center">
+              <h4
+                className="text-white font-serif"
+                style={{ fontFamily: "Cinzel, serif" }}
+              >
                 Welcome user
               </h4>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              {/* Profile dropdown */}
+
               <div className="relative ml-3">
                 <button
                   type="button"
@@ -262,7 +266,7 @@ const Navbar = () => {
                 to="/CBEHome"
                 className={({ isActive }) =>
                   isActive
-                    ? "block rounded-md px-3 py-2 text-base font-medium text-white bg-white"
+                    ? "block rounded-md px-3 py-2 text-base font-medium text-white bg-gray-700"
                     : "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white hover:text-white"
                 }
               >
@@ -272,7 +276,7 @@ const Navbar = () => {
                 to="/CBEOffice"
                 className={({ isActive }) =>
                   isActive
-                    ? "block rounded-md px-3 py-2 text-base font-medium text-white bg-white"
+                    ? "block rounded-md px-3 py-2 text-base font-medium text-white bg-gray-700"
                     : "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                 }
               >
