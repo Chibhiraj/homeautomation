@@ -5,18 +5,17 @@ import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import bg from '../font and soze.jpg'
+import bg from '../font and soze.jpg';
 import smallBg from '../brand.png';  // Import the smaller device image
 import { Image } from "react-bootstrap";
 import { AppBar, Toolbar, Typography, IconButton, Button, useMediaQuery, Drawer, List, ListItem, ListItemText } from '@mui/material';
-import nav from "../nav.png"
+import nav from "../nav.png";
+
 const Home = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
-  const isSmallScreen = useMediaQuery('(max-width: 600px)'); // Adjust the breakpoint as needed
+  const isSmallScreen = useMediaQuery('(max-width: 600px)'); // Detects if on mobile
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const isMobile = useMediaQuery('(max-width:600px)');
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -24,6 +23,7 @@ const Home = () => {
     }
     setDrawerOpen(open);
   };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -31,7 +31,7 @@ const Home = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   const drawerItems = (
     <List>
       {['Home', 'Contact', 'Services', 'Products', 'About'].map((text, index) => (
@@ -55,61 +55,57 @@ const Home = () => {
 
   return (
     <div>
- <AppBar position="fixed" style={{ backgroundColor: '#2e3e57' }}>
-      <Toolbar>
-        <img src={nav} alt="logo" style={{ height: 40 }} />
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          {/* Optional Logo or Title */}
-        </Typography>
-        
-        {isMobile ? (
-          <>
-            <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-              <MenuIcon />
-            </IconButton>
-            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-              {drawerItems}
-            </Drawer>
-          </>
-        ) : (
-          <>
-            <Button color="inherit" component={Link} to="/" style={{ margin: '0 15px' }}>
-              Home
-            </Button>
-            <Button color="inherit" component={Link} to="/contact" style={{ margin: '0 15px' }}>
-              Contact
-            </Button>
-            <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
-              Services
-            </Button>
-            <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
-              Products
-            </Button>
-            <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
-              About
-            </Button>
-          </>
-        )}
-      </Toolbar>
-    </AppBar>
+      <AppBar position="fixed" style={{ backgroundColor: '#2e3e57' }}>
+        <Toolbar>
+          <img src={nav} alt="logo" style={{ height: 40 }} />
+          <Typography variant="h6" style={{ flexGrow: 1 }}>
+            {/* Optional Logo or Title */}
+          </Typography>
+          <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+            <MenuIcon />
+          </IconButton>
+          <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)} style={{paddingBottom:"6"}}>
+            {drawerItems}
+          </Drawer>
+        </Toolbar>
+      </AppBar>
 
-      <div style={{ position: 'relative', display: 'inline-block'}}>
-        <Image src={isSmallScreen ? smallBg : bg}  />
+      <div style={{ position: 'relative', display: 'inline-block', width: '100%', paddingTop:isSmallScreen ? '75px':'', textAlign: 'center' }}>
+        
+        {/* Title */}
+        {isSmallScreen &&
+
+        <h2 style={{ fontFamily: 'Cenzil', fontSize: '24px', color: '#3E2723',paddingTop:'20px' }}>
+          Welcome to mSmart automation
+        </h2>
+        } 
+        
+        {/* Background Image */}
+        <Image src={isSmallScreen ? smallBg : bg} style={{ width: '100%', paddingBottom: isSmallScreen ? '100px' : '',paddingTop: isSmallScreen ? '50px' : '50px' }} />
+    
+        {/* Login/SignUp Button */}
         <Button
           onClick={handleClickOpen}
           variant="contained"
           color="secondary"
           style={{
-            position: 'absolute',
-            top: '70%',
-            left: '60%',
-            transform: 'translate(-70%, -50%)',
-            backgroundColor: "#3E2723 ",
-            fontFamily: 'Cenzil'
+            position: isSmallScreen ? 'relative' : 'absolute',
+            top: isSmallScreen ? 'unset' : '70%',
+            left: isSmallScreen ? 'unset' : '60%',
+            transform: isSmallScreen ? 'none' : 'translate(-70%, -50%)',
+            backgroundColor: "#3E2723",
+            fontFamily: 'Cenzil',
           }}
         >
           Login/SignUp
         </Button>
+
+        {isSmallScreen &&
+        <footer style={{ marginTop: '20px', fontSize: '12px', color: '#666',paddingTop:'70px' }}>
+          <p>&copy; 2024 mSmart automation. All rights reserved.</p>
+          <p>Privacy Policy | Terms of Service</p>
+        </footer>
+        }
       </div>
 
       <Dialog open={open} onClose={handleClose}>
