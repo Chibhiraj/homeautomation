@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import login from "../img/10782835_19199259.jpg";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import bg from '../font and soze.jpg'
 import smallBg from '../brand.png';  // Import the smaller device image
 import { Image } from "react-bootstrap";
-import { useMediaQuery } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton, Button, useMediaQuery, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import nav from "../nav.png"
 const Home = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const isSmallScreen = useMediaQuery('(max-width: 600px)'); // Adjust the breakpoint as needed
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width:600px)');
 
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -28,6 +31,16 @@ const Home = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const drawerItems = (
+    <List>
+      {['Home', 'Contact', 'Services', 'Products', 'About'].map((text, index) => (
+        <ListItem button key={text} component={Link} to={text.toLowerCase()}>
+          <ListItemText primary={text} />
+        </ListItem>
+      ))}
+    </List>
+  );
 
   function useradmin() {
     var mail = document.getElementById("maillogin").value;
@@ -42,30 +55,43 @@ const Home = () => {
 
   return (
     <div>
-     <AppBar position="fixed" style={{ backgroundColor: '#2e3e57' }}>
-  <Toolbar>
-  <img src={nav} alt="logo" style={{ height: 40 }} />
-  <Typography variant="h6" style={{ flexGrow: 1 }}>
-    
-    </Typography>
-    <IconButton edge="end" color="inherit" aria-label="menu"></IconButton>
-    <Button color="inherit" component={Link} to="/" style={{ margin: '0 15px' }}>
-      Home
-    </Button>
-    <Button color="inherit" component={Link} to="/contact" style={{ margin: '0 15px' }}>
-      Contact
-    </Button>
-    <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
-      Services
-    </Button>
-    <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
-      Products
-    </Button>
-    <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
-      About
-    </Button>
-  </Toolbar>
-</AppBar>
+ <AppBar position="fixed" style={{ backgroundColor: '#2e3e57' }}>
+      <Toolbar>
+        <img src={nav} alt="logo" style={{ height: 40 }} />
+        <Typography variant="h6" style={{ flexGrow: 1 }}>
+          {/* Optional Logo or Title */}
+        </Typography>
+        
+        {isMobile ? (
+          <>
+            <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+              <MenuIcon />
+            </IconButton>
+            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+              {drawerItems}
+            </Drawer>
+          </>
+        ) : (
+          <>
+            <Button color="inherit" component={Link} to="/" style={{ margin: '0 15px' }}>
+              Home
+            </Button>
+            <Button color="inherit" component={Link} to="/contact" style={{ margin: '0 15px' }}>
+              Contact
+            </Button>
+            <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
+              Services
+            </Button>
+            <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
+              Products
+            </Button>
+            <Button color="inherit" component={Link} to="/signpage" style={{ margin: '0 15px' }}>
+              About
+            </Button>
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
 
       <div style={{ position: 'relative', display: 'inline-block'}}>
         <Image src={isSmallScreen ? smallBg : bg}  />
