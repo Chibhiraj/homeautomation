@@ -35,7 +35,7 @@ function YourComponent() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/hall")
+      .get("https://msmartserver.onrender.com/api/hall")
       .then((response) => {
         if (response.data) {
           setHallSwitch(response.data);
@@ -48,7 +48,7 @@ function YourComponent() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/myroom")
+      .get("https://msmartserver.onrender.com/api/myroom")
       .then((response) => {
         if (response.data) {
           setRoomSwitch(response.data);
@@ -66,7 +66,7 @@ function YourComponent() {
     setLastChangedHallSwitch({ name, checked });
 
     axios
-      .post("http://localhost:3001/api/hall", updatedStates)
+      .post("https://msmartserver.onrender.com/api/hall", updatedStates)
       .then((response) => {
         console.log("Switch states saved to the database:", response.data);
       })
@@ -82,7 +82,7 @@ function YourComponent() {
     setLastChangedRoomSwitch({ name, checked });
 
     axios
-      .post("http://localhost:3001/api/myroom", updatedStates)
+      .post("https://msmartserver.onrender.com/api/myroom", updatedStates)
       .then((response) => {
         console.log("Switch states saved to the database:", response.data);
       })
