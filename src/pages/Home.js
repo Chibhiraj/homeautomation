@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import bg from '../font and soze.jpg';
-import smallBg from '../brand.png';  // Import the smaller device image
+import bg from '../img/font and soze.jpg';
+import smallBg from '../img/brand.png';  // Import the smaller device image
 import { Image } from "react-bootstrap";
 import { AppBar, Toolbar, Typography, IconButton, Button, useMediaQuery, Drawer, List, ListItem, ListItemText } from '@mui/material';
-import nav from "../nav.png";
+import nav from "../img/nav.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Home = () => {
   const drawerItems = (
     <List>
       {['Home', 'Contact', 'Services', 'Products', 'About'].map((text, index) => (
-        <ListItem button key={text} component={Link} to={text.toLowerCase()}>
+        <ListItem  key={text} component={Link} to={text.toLowerCase()}>
           <ListItemText primary={text} />
         </ListItem>
       ))}
