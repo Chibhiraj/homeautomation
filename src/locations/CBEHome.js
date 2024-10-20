@@ -15,26 +15,30 @@ import Navbar from "../pages/navbar";
 import axios from "axios";
 
 function YourComponent() {
-  const [switchStates, setSwitchStates] = useState({
+
+  const [hallSwitch, setHallSwitch] = useState({
     Light1: false,
     Light2: false,
     TvFan: false,
     SofaFan: false,
-    SpotLight: false,
+  });
+
+  const [roomSwitch, setRoomSwitch] = useState({
     RLight: false,
     RFan: false,
     RAc: false,
     RWifi: false,
   });
 
-  const [lastChangedSwitch, setLastChangedSwitch] = useState(null);
+  const [lastChangedHallSwitch, setLastChangedHallSwitch] = useState(null);
+  const [lastChangedRoomSwitch, setLastChangedRoomSwitch] = useState(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/switches")
+      .get("http://localhost:3001/api/hall")
       .then((response) => {
         if (response.data) {
-          setSwitchStates(response.data);
+          setHallSwitch(response.data);
         }
       })
       .catch((error) => {
@@ -42,14 +46,27 @@ function YourComponent() {
       });
   }, []);
 
-  const handleSwitchChange = (event) => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/myroom")
+      .then((response) => {
+        if (response.data) {
+          setRoomSwitch(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the switch states!", error);
+      });
+  }, []);
+
+  const handleHallSwitchChange = (event) => {
     const { name, checked } = event.target;
-    const updatedStates = { ...switchStates, [name]: checked };
-    setSwitchStates(updatedStates);
-    setLastChangedSwitch({ name, checked });
+    const updatedStates = { ...hallSwitch, [name]: checked };
+    setHallSwitch(updatedStates);
+    setLastChangedHallSwitch({ name, checked });
 
     axios
-      .post("http://localhost:3001/api/switches", updatedStates)
+      .post("http://localhost:3001/api/hall", updatedStates)
       .then((response) => {
         console.log("Switch states saved to the database:", response.data);
       })
@@ -58,12 +75,35 @@ function YourComponent() {
       });
   };
 
-  useEffect(() => {
-    if (lastChangedSwitch) {
-      const { name, checked } = lastChangedSwitch;
-      console.log(`${name} is ${checked ? 1 : 0}`);
-    }
-  }, [lastChangedSwitch]);
+  const handleRoomSwitchChange = (event) => {
+    const { name, checked } = event.target;
+    const updatedStates = { ...roomSwitch, [name]: checked };
+    setRoomSwitch(updatedStates);
+    setLastChangedRoomSwitch({ name, checked });
+
+    axios
+      .post("http://localhost:3001/api/myroom", updatedStates)
+      .then((response) => {
+        console.log("Switch states saved to the database:", response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error saving the switch states!", error);
+      });
+  };
+
+  // useEffect(() => {
+  //   if (lastChangedHallSwitch) {
+  //     const { name, checked } = lastChangedHallSwitch;
+  //     console.log(`${name} is ${checked ? 1 : 0}`);
+  //   }
+  // }, [lastChangedHallSwitch]);
+
+  // useEffect(() => {
+  //   if (lastChangedRoomSwitch) {
+  //     const { name, checked } = lastChangedRoomSwitch;
+  //     console.log(`${name} is ${checked ? 1 : 0}`);
+  //   }
+  // }, [lastChangedRoomSwitch]);
 
   return (
     <div>
@@ -93,7 +133,7 @@ function YourComponent() {
               <Table>
                 <TableBody>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                    <TableCell sx={{ borderBottom: "none" }} align="right">
                       <Typography
                         variant="body1"
                         component="div"
@@ -102,14 +142,14 @@ function YourComponent() {
                         Light 1
                       </Typography>
                     </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                    <TableCell sx={{ borderBottom: "none" }} align="left">
                       <Switch
-                        checked={switchStates.Light1}
-                        onChange={handleSwitchChange}
+                        checked={hallSwitch.Light1}
+                        onChange={handleHallSwitchChange}
                         name="Light1"
                         inputProps={{ "aria-label": "Light 1" }}
                         style={{
-                          color: switchStates.Light1 ? "#FFB200" : "#808D7C",
+                          color: hallSwitch.Light1 ? "#FFB200" : "#808D7C",
                           "&.Mui-checked": {
                             color: "red",
                           },
@@ -118,7 +158,7 @@ function YourComponent() {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                    <TableCell sx={{ borderBottom: "none" }} align="right">
                       <Typography
                         variant="body1"
                         component="div"
@@ -127,14 +167,14 @@ function YourComponent() {
                         Light 2
                       </Typography>
                     </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                    <TableCell sx={{ borderBottom: "none" }} align="left">
                       <Switch
-                        checked={switchStates.Light2}
-                        onChange={handleSwitchChange}
+                        checked={hallSwitch.Light2}
+                        onChange={handleHallSwitchChange}
                         name="Light2"
                         inputProps={{ "aria-label": "Light 2" }}
                         style={{
-                          color: switchStates.Light2 ? "#FFB200" : "#808D7C",
+                          color: hallSwitch.Light2 ? "#FFB200" : "#808D7C",
                           "&.Mui-checked": {
                             color: "red",
                           },
@@ -143,7 +183,7 @@ function YourComponent() {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                    <TableCell sx={{ borderBottom: "none" }} align="right">
                       <Typography
                         variant="body1"
                         component="div"
@@ -152,14 +192,14 @@ function YourComponent() {
                         TV Fan
                       </Typography>
                     </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                    <TableCell sx={{ borderBottom: "none" }} align="left">
                       <Switch
-                        checked={switchStates.TvFan}
-                        onChange={handleSwitchChange}
+                        checked={hallSwitch.TvFan}
+                        onChange={handleHallSwitchChange}
                         name="TvFan"
                         inputProps={{ "aria-label": "TV Fan" }}
                         style={{
-                          color: switchStates.TvFan ? "#FFB200" : "#808D7C",
+                          color: hallSwitch.TvFan ? "#FFB200" : "#808D7C",
                           "&.Mui-checked": {
                             color: "red",
                           },
@@ -168,7 +208,7 @@ function YourComponent() {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                    <TableCell sx={{ borderBottom: "none" }} align="right">
                       <Typography
                         variant="body1"
                         component="div"
@@ -177,14 +217,14 @@ function YourComponent() {
                         Sofa Fan
                       </Typography>
                     </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                    <TableCell sx={{ borderBottom: "none" }} align="left">
                       <Switch
-                        checked={switchStates.SofaFan}
-                        onChange={handleSwitchChange}
+                        checked={hallSwitch.SofaFan}
+                        onChange={handleHallSwitchChange}
                         name="SofaFan"
                         inputProps={{ "aria-label": "Sofa Fan" }}
                         style={{
-                          color: switchStates.SofaFan ? "#FFB200" : "#808D7C",
+                          color: hallSwitch.SofaFan ? "#FFB200" : "#808D7C",
                           "&.Mui-checked": {
                             color: "red",
                           },
@@ -201,7 +241,11 @@ function YourComponent() {
               <div style={{ backgroundColor: "#9e8a57" }}>
                 <h3
                   className="text text-center pb-2 pt-1"
-                  style={{ color: "white", fontFamily: "Cinzel, serif", fontSize: '4' }}
+                  style={{
+                    color: "white",
+                    fontFamily: "Cinzel, serif",
+                    fontSize: "4",
+                  }}
                 >
                   My Room
                 </h3>
@@ -209,7 +253,7 @@ function YourComponent() {
               <Table>
                 <TableBody>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                    <TableCell sx={{ borderBottom: "none" }} align="right">
                       <Typography
                         variant="body1"
                         component="div"
@@ -218,14 +262,14 @@ function YourComponent() {
                         Light
                       </Typography>
                     </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                    <TableCell sx={{ borderBottom: "none" }} align="left">
                       <Switch
-                        checked={switchStates.RLight}
-                        onChange={handleSwitchChange}
+                        checked={roomSwitch.RLight}
+                        onChange={handleRoomSwitchChange}
                         name="RLight"
                         inputProps={{ "aria-label": "Light" }}
                         style={{
-                          color: switchStates.RLight ? "#FFB200" : "#808D7C",
+                          color: roomSwitch.RLight ? "#FFB200" : "#808D7C",
                           "&.Mui-checked": {
                             color: "red",
                           },
@@ -234,7 +278,7 @@ function YourComponent() {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                    <TableCell sx={{ borderBottom: "none" }} align="right">
                       <Typography
                         variant="body1"
                         component="div"
@@ -243,14 +287,14 @@ function YourComponent() {
                         Fan
                       </Typography>
                     </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                    <TableCell sx={{ borderBottom: "none" }} align="left">
                       <Switch
-                        checked={switchStates.RFan}
-                        onChange={handleSwitchChange}
+                        checked={roomSwitch.RFan}
+                        onChange={handleRoomSwitchChange}
                         name="RFan"
                         inputProps={{ "aria-label": "Fan" }}
                         style={{
-                          color: switchStates.RFan ? "#FFB200" : "#808D7C",
+                          color: roomSwitch.RFan ? "#FFB200" : "#808D7C",
                           "&.Mui-checked": {
                             color: "red",
                           },
@@ -259,7 +303,7 @@ function YourComponent() {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                    <TableCell sx={{ borderBottom: "none" }} align="right">
                       <Typography
                         variant="body1"
                         component="div"
@@ -268,14 +312,14 @@ function YourComponent() {
                         AC
                       </Typography>
                     </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                    <TableCell sx={{ borderBottom: "none" }} align="left">
                       <Switch
-                        checked={switchStates.RAc}
-                        onChange={handleSwitchChange}
+                        checked={roomSwitch.RAc}
+                        onChange={handleRoomSwitchChange}
                         name="RAc"
                         inputProps={{ "aria-label": "AC" }}
                         style={{
-                          color: switchStates.RAc ? "#FFB200" : "#808D7C",
+                          color: roomSwitch.RAc ? "#FFB200" : "#808D7C",
                           "&.Mui-checked": {
                             color: "red",
                           },
@@ -284,7 +328,7 @@ function YourComponent() {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }} align="right" >
+                    <TableCell sx={{ borderBottom: "none" }} align="right">
                       <Typography
                         variant="body1"
                         component="div"
@@ -293,14 +337,14 @@ function YourComponent() {
                         Wifi
                       </Typography>
                     </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="left" >
+                    <TableCell sx={{ borderBottom: "none" }} align="left">
                       <Switch
-                        checked={switchStates.RWifi}
-                        onChange={handleSwitchChange}
+                        checked={roomSwitch.RWifi}
+                        onChange={handleRoomSwitchChange}
                         name="RWifi"
                         inputProps={{ "aria-label": "Wifi" }}
                         style={{
-                          color: switchStates.RWifi ? "#FFB200" : "#808D7C",
+                          color: roomSwitch.RWifi ? "#FFB200" : "#808D7C",
                           "&.Mui-checked": {
                             color: "red",
                           },

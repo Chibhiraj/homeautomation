@@ -17,7 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import CBEHome from "../locations/CBEHome";
-import brand from "../brand.png";
+import brand from "../img/brand.png";
 // import { Home as HomeIcon, Timeline as TimelineIcon, Assignment as AssignmentIcon } from '@mui/icons-material';
 
 const Navbar = () => {
@@ -101,7 +101,7 @@ const Navbar = () => {
                 CBE Home
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 to="/CBEOffice"
                 className={({ isActive }) =>
@@ -128,7 +128,7 @@ const Navbar = () => {
                 </svg>
                 CBE Office
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>
